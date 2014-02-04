@@ -20,8 +20,9 @@
 
         for (var i=1;i<dbData.length;i++) {
           var newdata = dbData[i][0].split('-')
+          newdata=new Date(newdata[0],newdata[1]-1,newdata[2],newdata[3],newdata[4],0,0)
+          newdata=moment(newdata).format('YYYY-MM-DD-hh-mm');
           dbData[i][0]=new Date(newdata[0],newdata[1]-1,newdata[2],newdata[3],newdata[4],0,0)
-          dbData[i][0]=moment(dbData[i][0]).format();
         }
 
         for (var i=1;i<dbData.length;i++) {
