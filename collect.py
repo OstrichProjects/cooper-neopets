@@ -23,6 +23,7 @@ for i in logins:
 		br.open(bank)
 		soupbank=soup(br.response().read())
 		bankpoints=soupbank.find(align='center',style='font-weight: bold;')
+		bankpoints=bankpoints.text
 		if (type(bankpoints) is not unicode):
 			bankpoints=0
 		else:
