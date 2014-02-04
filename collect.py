@@ -3,6 +3,7 @@ import mechanize
 from bs4 import BeautifulSoup as soup
 import datetime
 from app import app, models, db
+import unicodedata
 
 logins = models.User.query.all()
 
@@ -27,7 +28,7 @@ for i in logins:
 		if (type(bankpoints) is not unicode):
 			bankpoints=0
 		else:
-			bankpoints=bankpoints.string
+			bankpoints=unicodedata.normalize('NFKD',bankpoints).encode('ascii','ignore')
 			bankpoints=bankpoints.replace(',','')
 			bankpoints=bankpoints.replace(' NP','')
 			bankpoints=int(bankpoints)
