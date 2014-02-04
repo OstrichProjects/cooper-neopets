@@ -16,25 +16,25 @@ for i in logins:
 	br.form['username']=username
 	br.form['password']=password
 	br.submit()
+	if br.geturl()=='http://www.neopets.com/':
+		neopoints = int([l.text for l in br.links(url_regex='inventory')][0].replace(',',''))
 
-	neopoints = int([l.text for l in br.links(url_regex='inventory')][0].replace(',',''))
+		bank = br.click_link(url='/bank.phtml')
+		br.open(bank)
+		soupbank=soup(br.response().read())
+		bankpoints=soupbank.find(align='center',style='font-weight: bold;')
+		if (type(bankpoints) is not unicode):
+			bankpoints=0
+		else:
+			bankpoints=bankpoints.string
+			bankpoints=bankpoints.replace(',','')
+			bankpoints=bankpoints.replace(' NP','')
+			bankpoints=int(bankpoints)
 
-	bank = br.click_link(url='/bank.phtml')
-	br.open(bank)
-	soupbank=soup(br.response().read())
-	bankpoints=soupbank.find(align='center',style='font-weight: bold;')
-	if (type(bankpoints) is not unicode):
-		bankpoints=0
-	else:
-		bankpoints=bankpoints.string
-		bankpoints=bankpoints.replace(',','')
-		bankpoints=bankpoints.replace(' NP','')
-		bankpoints=int(bankpoints)
+		totalpoints=bankpoints+neopoints
+		totalpoints=str(totalpoints)
 
-	totalpoints=bankpoints+neopoints
-	totalpoints=str(totalpoints)
-
-	datapoint = models.DataPoint(points=totalpoints,timestamp=datetime.datetime.now(), author=i)
-	db.session.add(datapoint)
+		datapoint = models.DataPoint(points=totalpoints,timestamp=datetime.datetime.now(), author=i)
+		db.session.add(datapoint)
 
 db.session.commit()
