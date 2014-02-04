@@ -1,0 +1,5 @@
+flask
+*.pyc
+app.db
+db_repository
+virtualenv.py

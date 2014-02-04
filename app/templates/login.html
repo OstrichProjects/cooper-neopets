@@ -1,0 +1,22 @@
+<html>
+	<head>
+	</head>
+	<body>
+	<h1>Sign In</h1>
+		<form action="" method="post" name="login">
+		    {{form.hidden_tag()}}
+		    <p>
+		        Enter your login info:<br>
+		        Username:  {{form.username(size=40)}}<br>
+		        Password:  {{form.password(size=40)}}
+		    </p>
+		    <p><input type="submit" value="Add Login Info"></p>
+		</form>
+		<p>
+			Users already added:
+			{% for u in users %}
+				<div>{{ u.username }}</div>
+			{% endfor %}
+		</p>
+	</body>
+</html>
