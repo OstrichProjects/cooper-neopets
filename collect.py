@@ -32,6 +32,7 @@ for i in logins:
 			bankpoints=bankpoints.replace(',','')
 			bankpoints=bankpoints.replace(' NP','')
 			bankpoints=int(bankpoints)
+			print bankpoints
 
 		totalpoints=bankpoints+neopoints
 		totalpoints=str(totalpoints)
