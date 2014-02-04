@@ -3,6 +3,7 @@
     <title>{{title}}</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="http://momentjs.com/downloads/moment.min.js"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["corechart","table"]});
       google.setOnLoadCallback(drawChart);
@@ -20,6 +21,7 @@
         for (var i=1;i<dbData.length;i++) {
           var newdata = dbData[i][0].split('-')
           dbData[i][0]=new Date(newdata[0],newdata[1]-1,newdata[2],newdata[3],newdata[4],0,0)
+          dbData[i][0]=moment(dbData[i][0]).format();
         }
 
         for (var i=1;i<dbData.length;i++) {
