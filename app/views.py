@@ -2,13 +2,25 @@ from flask import render_template, flash, redirect
 from app import app, db
 from forms import LoginForm
 from models import User
+import unicodedata
 
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template("index.html",
+	users = User.query.all()
+	data=[['Time']]
+	for i in users[0].datapoints:
+		data[0].append(i.timestamp.strftime('%Y-%m-%d-%H-%M'))
+	for u in users:
+		pointlist=[unicodedata.normalize('NFKD',u.username).encode('ascii','ignore')]
+		for i in u.datapoints:
+			pointlist.append(int(i.points))
+		data.append(pointlist)
+	data=zip(*data)
+	data=[list(row) for row in data]
+	return render_template("index.html",
     	title = 'Cooper Neopets',
-    	data=[])
+    	data=data)
 
 @app.route('/login', methods= ['GET','POST'])
 def login():

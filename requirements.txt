@@ -10,6 +10,8 @@ Werkzeug==0.9.4
 argparse==1.2.1
 beautifulsoup4==4.3.2
 decorator==3.4.0
+gunicorn==18.0
 mechanize==0.2.5
+psycopg2==2.5.2
 sqlalchemy-migrate==0.7.2
 wsgiref==0.1.2

@@ -1,7 +1,8 @@
+#!flask/bin/python
 import mechanize
 from bs4 import BeautifulSoup as soup
 import datetime
-from app import app
+from app import app, models, db
 
 logins = models.User.query.all()
 
