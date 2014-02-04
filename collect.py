@@ -23,10 +23,13 @@ for i in logins:
 	br.open(bank)
 	soupbank=soup(br.response().read())
 	bankpoints=soupbank.find(align='center',style='font-weight: bold;')
-	bankpoints=bankpoints.string
-	bankpoints=bankpoints.replace(',','')
-	bankpoints=bankpoints.replace(' NP','')
-	bankpoints=int(bankpoints)
+	if (type(bankpoints) is not unicode):
+		bankpoints=0
+	else:
+		bankpoints=bankpoints.string
+		bankpoints=bankpoints.replace(',','')
+		bankpoints=bankpoints.replace(' NP','')
+		bankpoints=int(bankpoints)
 
 	totalpoints=bankpoints+neopoints
 	totalpoints=str(totalpoints)

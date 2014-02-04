@@ -2,3 +2,9 @@
 runtime "python"
 # exec is the file that will be executed:
 exec "collect.py"
+
+pip "mechanize"
+pip "beautifulsoup4"
+pip "datetime"
+
+full_remote_build true
