@@ -1,6 +1,6 @@
 from app import app, models, db
 
-u = models.User.query.all()
+users = models.User.query.all()
 
 for u in users:
 	if u.username=='testing314':
