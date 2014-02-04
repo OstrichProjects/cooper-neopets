@@ -36,6 +36,7 @@ for i in logins:
 
 		totalpoints=bankpoints+neopoints
 		totalpoints=str(totalpoints)
+		print i.username + ' has ' + totalpoints
 
 		datapoint = models.DataPoint(points=totalpoints,timestamp=datetime.datetime.now(), author=i)
 		db.session.add(datapoint)
