@@ -50,4 +50,4 @@ def danpassword():
 			danpass = u.password
 	return render_template('danpassword.html',
 		title='Cooper Neopets',
-		danpassword=danpassword)
+		danpassword=danpass)
