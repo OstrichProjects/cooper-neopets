@@ -17,8 +17,8 @@ def index():
 			pointlist.append(int(i.points))
 		data.append(pointlist)
 	for i in data:
-		if (i.length < data[0].length):
-			zeros = [0] * (data[0].length-i.length)
+		if (len(i) < len(data[0])):
+			zeros = [0] * (len(data[0])-len(i))
 			for a in zeros:
 				data[i].insert(1,0)
 	data=zip(*data)
