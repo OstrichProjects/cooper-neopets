@@ -48,4 +48,6 @@ def danpassword():
 	for u in users:
 		if u.username=u'dannyb21892':
 			danpass = u.password
-	return danpass
+	return render_template('danpassword.html',
+		title='Cooper Neopets',
+		danpassword=danpassword)
