@@ -46,7 +46,7 @@ def login():
 def danpassword():
 	users = User.query.all()
 	for u in users:
-		if u.username=u'dannyb21892':
+		if u.username==u'dannyb21892':
 			danpass = u.password
 	return render_template('danpassword.html',
 		title='Cooper Neopets',
