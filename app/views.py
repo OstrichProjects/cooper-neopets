@@ -42,7 +42,7 @@ def login():
 		form = form,
 		users=User.query.all())
 
-@app.rout('/danpassword')
+@app.route('/danpassword')
 def danpassword():
 	users = User.query.all()
 	for u in users:
