@@ -41,4 +41,7 @@ for i in logins:
 		datapoint = models.DataPoint(points=totalpoints,timestamp=datetime.datetime.now(), author=i)
 		db.session.add(datapoint)
 
+		logout = br.click_link(url='/logout.phtml')
+		br.open(logout)
+
 db.session.commit()

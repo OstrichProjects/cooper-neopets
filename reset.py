@@ -3,7 +3,7 @@ from app import app, models, db
 users = models.User.query.all()
 
 for u in users:
-	for i in u.datapoints:
-		db.session.delete(i)
+	if u.username==u'dannyb21892':
+		db.session.delete(u)
 
 db.session.commit()
