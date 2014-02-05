@@ -16,10 +16,11 @@ def index():
 		for i in u.datapoints:
 			pointlist.append(int(i.points))
 		data.append(pointlist)
-	# for i in data:
-	# 	if (i.length < data[0].length):
-	# 		zeros = [0] * (data[0].length-i.length)
-	# 		data[0].insert(1,zeros)
+	for i in data:
+		if (i.length < data[0].length):
+			zeros = [0] * (data[0].length-i.length)
+			for a in zeros:
+				data[i].insert(1,0)
 	data=zip(*data)
 	data=[list(row) for row in data]
 	return render_template("index.html",
