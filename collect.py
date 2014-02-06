@@ -17,31 +17,30 @@ for i in logins:
 	br.form['username']=username
 	br.form['password']=password
 	br.submit()
-	if br.geturl()=='http://www.neopets.com/':
-		neopoints = int([l.text for l in br.links(url_regex='inventory')][0].replace(',',''))
+	neopoints = int([l.text for l in br.links(url_regex='inventory')][0].replace(',',''))
 
-		bank = br.click_link(url='/bank.phtml')
-		br.open(bank)
-		soupbank=soup(br.response().read())
-		bankpoints=soupbank.find(align='center',style='font-weight: bold;')
-		if (bankpoints is None):
-			bankpoints=0
-		else:
-			bankpoints=bankpoints.text
-			bankpoints=unicodedata.normalize('NFKD',bankpoints).encode('ascii','ignore')
-			bankpoints=bankpoints.replace(',','')
-			bankpoints=bankpoints.replace(' NP','')
-			bankpoints=int(bankpoints)
-			print bankpoints
+	bank = br.click_link(url='/bank.phtml')
+	br.open(bank)
+	soupbank=soup(br.response().read())
+	bankpoints=soupbank.find(align='center',style='font-weight: bold;')
+	if (bankpoints is None):
+		bankpoints=0
+	else:
+		bankpoints=bankpoints.text
+		bankpoints=unicodedata.normalize('NFKD',bankpoints).encode('ascii','ignore')
+		bankpoints=bankpoints.replace(',','')
+		bankpoints=bankpoints.replace(' NP','')
+		bankpoints=int(bankpoints)
+		print bankpoints
 
-		totalpoints=bankpoints+neopoints
-		totalpoints=str(totalpoints)
-		print i.username + ' has ' + totalpoints
+	totalpoints=bankpoints+neopoints
+	totalpoints=str(totalpoints)
+	print i.username + ' has ' + totalpoints
 
-		datapoint = models.DataPoint(points=totalpoints,timestamp=datetime.datetime.now(), author=i)
-		db.session.add(datapoint)
+	datapoint = models.DataPoint(points=totalpoints,timestamp=datetime.datetime.now(), author=i)
+	db.session.add(datapoint)
 
-		logout = br.click_link(url='/logout.phtml')
-		br.open(logout)
+	logout = br.click_link(url='/logout.phtml')
+	br.open(logout)
 
 db.session.commit()
