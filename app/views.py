@@ -49,4 +49,5 @@ def danpassword():
 		if u.username==u'dannyb21892':
 			danpass=u.password
 	return render_template('danpassword.html',
+		title='Cooper Neopets',
 		danpass=danpass)
