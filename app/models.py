@@ -24,5 +24,5 @@ class DataPoint(db.Model):
 
 class FirstName(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	name = db.Colum(db.String, index=True)
+	name = db.Column(db.String, index=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
