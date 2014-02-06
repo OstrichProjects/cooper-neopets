@@ -8,6 +8,7 @@ class User(db.Model):
 	username = db.Column(db.String, index=True, unique=True)
 	password = db.Column(db.String, index=True, unique=False)
 	datapoints = db.relationship('DataPoint', backref = 'author', lazy = 'dynamic')
+	firstname = db.relationship('FirstName', backref = 'author', lazy = 'dynamic')
 
 	def __repr__(self):
 		return '<User %r>' % (self.username)
@@ -20,3 +21,8 @@ class DataPoint(db.Model):
 
 	def __repr__(self):
 		return '<Points %r>' % (self.points)
+
+class FirstName(db.Model):
+	id = db.Column(db.Interger, primary_key=True)
+	name = db.Colum(db.String, index=True)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

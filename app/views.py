@@ -12,7 +12,8 @@ def index():
 	for i in users[0].datapoints:
 		data[0].append(i.timestamp.strftime('%Y-%m-%d-%H-%M'))
 	for u in users:
-		pointlist=[unicodedata.normalize('NFKD',u.username).encode('ascii','ignore')]
+		for q in u.firstname
+			pointlist=[q.name]
 		for i in u.datapoints:
 			pointlist.append(int(i.points))
 		data.append(pointlist)
