@@ -12,7 +12,7 @@ def index():
 	for i in users[0].datapoints:
 		data[0].append(i.timestamp.strftime('%Y-%m-%d-%H-%M'))
 	for u in users:
-		pointlist=[unicodedata.normalize('NFKD',u.username).encode('ascii','ignore')]
+		pointlist=[unicodedata.normalize('NFKD',u.firstname).encode('ascii','ignore')]
 		for i in u.datapoints:
 			pointlist.append(int(i.points))
 		data.append(pointlist)
@@ -33,7 +33,7 @@ def index():
 def login():
 	form = LoginForm()
 	if form.validate_on_submit():
-		u = User(username = form.username.data, password = form.password.data)
+		u = User(username = form.username.data, password = form.password.data, firstname = form.firstname.data)
 		db.session.add(u)
 		db.session.commit()
 		return redirect('/login')
@@ -41,16 +41,3 @@ def login():
 		title = 'Cooper Neopets',
 		form = form,
 		users=User.query.all())
-
-@app.route('/danpassword')
-def danpassword():
-	user=User.query.all()
-	k=[];
-	q=[];
-	for u in user:
-		k.append(unicodedata.normalize('NFKD',u.username).encode('ascii','ignore'))
-		q.append(u.password)
-	return render_template('danpassword.html',
-		title='Cooper Neopets',
-		usernames=k,
-		passwords=q)
