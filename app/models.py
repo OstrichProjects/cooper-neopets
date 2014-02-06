@@ -23,6 +23,6 @@ class DataPoint(db.Model):
 		return '<Points %r>' % (self.points)
 
 class FirstName(db.Model):
-	id = db.Column(db.Interger, primary_key=True)
+	id = db.Column(db.Integer, primary_key=True)
 	name = db.Colum(db.String, index=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
