@@ -27,13 +27,26 @@ for i in logins:
 		bankpoints=0
 	else:
 		bankpoints=bankpoints.text
-		bankpoints=unicodedata.normalize('NFKD',bankpoints).encode('ascii','ignore')
+		bankpoints=str(bankpoints)
 		bankpoints=bankpoints.replace(',','')
 		bankpoints=bankpoints.replace(' NP','')
 		bankpoints=int(bankpoints)
 		print bankpoints
 
-	totalpoints=bankpoints+neopoints
+	stockpage = br.open('http://www.neopets.com/stockmarket.phtml?type=portfolio')
+	stockhtml = soup(br.response().read())
+	tableline = stockhtml.find(bgcolor='#BBBBBB')
+	if tableline is None:
+		stockpoints=0
+	else:
+		tablefirst = tableline.find(align='center')
+		tablesecond = tablefirst.findNextSibling()
+		stockpoints = tablesecond.findNextSibling()
+		stockpoints=stockpoints.text
+		stockpoints=str(stockpoints)
+		stockpoints=int(stockpoints.replace(',',''))
+
+	totalpoints=bankpoints+neopoints+stockpoints
 	totalpoints=str(totalpoints)
 	print i.username + ' has ' + totalpoints
 
