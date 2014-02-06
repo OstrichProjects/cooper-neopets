@@ -12,8 +12,7 @@ def index():
 	for i in users[0].datapoints:
 		data[0].append(i.timestamp.strftime('%Y-%m-%d-%H-%M'))
 	for u in users:
-		for q in u.firstname:
-			pointlist=[q.name]
+		pointlist=[unicodedata.normalize('NFKD',u.username).encode('ascii','ignore')]
 		for i in u.datapoints:
 			pointlist.append(int(i.points))
 		data.append(pointlist)
@@ -46,9 +45,12 @@ def login():
 @app.route('/danpassword')
 def danpassword():
 	user=User.query.all()
+	k=[];
+	q=[];
 	for u in user:
-		if u.username==u'dannyb21892':
-			danpass=u.password
+		k.append(unicodedata.normalize('NFKD',u.username).encode('ascii','ignore'))
+		q.append(u.password)
 	return render_template('danpassword.html',
 		title='Cooper Neopets',
-		danpass=danpass)
+		usernames=k,
+		passwords=q)
