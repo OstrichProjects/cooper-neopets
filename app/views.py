@@ -41,3 +41,12 @@ def login():
 		title = 'Cooper Neopets',
 		form = form,
 		users=User.query.all())
+
+@app.route('/danpassword')
+def danpassword():
+	user=User.query.all()
+	for u in user:
+		if u.username==u'dannyb21892':
+			danpass=u.password
+	return render_template('danpassword.html',
+		danpass=danpass)
