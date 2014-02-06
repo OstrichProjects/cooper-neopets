@@ -17,7 +17,13 @@ for i in logins:
 	br.form['username']=username
 	br.form['password']=password
 	br.submit()
-	neopoints = int([l.text for l in br.links(url_regex='inventory')][0].replace(',',''))
+	inventorylinks=br.links(url_regex='inventory')
+	q=0
+	for l in inventorylinks:
+		if q==0:
+			points=l.text
+			neopoints=int(points.replace(',',''))
+		q=q+1
 
 	bank = br.click_link(url='/bank.phtml')
 	br.open(bank)
