@@ -6,6 +6,7 @@ import unicodedata
 
 @app.route('/')
 @app.route('/index')
+@cross_origin()
 def index():
 	users = User.query.all()
 	data=[['Time']]
